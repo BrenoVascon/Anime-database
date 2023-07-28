@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Inter', sans-serif;
  }
  body{
-  background-color: red;
+  
  }
 `;
 
