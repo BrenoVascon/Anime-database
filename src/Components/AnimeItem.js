@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import React from "react";
-import styled from "styled-components";
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import React from 'react'
+import styled from 'styled-components'
 
 function AnimeItem() {
-  const { id } = useParams();
+  const { id } = useParams()
 
   //state
-  const [anime, setAnime] = React.useState({});
-  const [characters, setCharacters] = React.useState([]);
-  const [showMore, setShowMore] = React.useState([false]);
+  const [anime, setAnime] = React.useState({})
+  const [characters, setCharacters] = React.useState([])
+  const [showMore, setShowMore] = React.useState([false])
 
   //destructure anime
   const {
@@ -27,30 +27,30 @@ function AnimeItem() {
     popularity,
     status,
     rating,
-    source,
-  } = anime;
+    source
+  } = anime
 
   //get anime based on id
-  const getAnime = async (id) => {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
-    const data = await response.json();
-    setAnime(data.data);
-  };
+  const getAnime = async id => {
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
+    const data = await response.json()
+    setAnime(data.data)
+  }
 
   // get characters
-  const getCharacters = async (anime) => {
+  const getCharacters = async anime => {
     const response = await fetch(
       `https://api.jikan.moe/v4/anime/${anime}/characters`
-    );
-    const data = await response.json();
-    setCharacters(data.data);
-  };
+    )
+    const data = await response.json()
+    setCharacters(data.data)
+  }
 
   //initial render
   useEffect(() => {
-    getAnime(id);
-    getCharacters(id);
-  }, [id]);
+    getAnime(id)
+    getCharacters(id)
+  }, [id])
 
   return (
     <div>
@@ -63,85 +63,75 @@ function AnimeItem() {
             </div>
             <div className="anime-details">
               <p>
-                <span>
-                  Aired:<span>{aired?.string}</span>
-                </span>
+                <span>Aired:</span>
+                <span>{aired?.string}</span>
               </p>
               <p>
-                <span>
-                  Rating:<span>{rating}</span>
-                </span>
+                <span>Rating:</span>
+                <span>{rating}</span>
               </p>
               <p>
-                <span>
-                  Rank:<span>{rank}</span>
-                </span>
+                <span>Rank:</span>
+                <span>{rank}</span>
               </p>
               <p>
-                <span>
-                  Score:<span>{score}</span>
-                </span>
+                <span>Score:</span>
+                <span>{score}</span>
               </p>
               <p>
-                <span>
-                  Scored by:<span>{scored_by}</span>
-                </span>
+                <span>Scored by:</span>
+                <span>{scored_by}</span>
               </p>
               <p>
-                <span>
-                  Popularity:<span>{popularity}</span>
-                </span>
+                <span>Popularity:</span>
+                <span>{popularity}</span>
               </p>
               <p>
-                <span>
-                  Status:<span>{status}</span>
-                </span>
+                <span>Status:</span>
+                <span>{status}</span>
               </p>
               <p>
-                <span>
-                  Source:<span>{source}</span>
-                </span>
+                <span>Source:</span>
+                <span>{source}</span>
               </p>
               <p>
-                <span>
-                  Season:<span>{season}</span>
-                </span>
+                <span>Season:</span>
+                <span>{season}</span>
               </p>
               <p>
-                <span>
-                  Duration:<span>{duration}</span>
-                </span>
+                <span>Duration:</span>
+                <span>{duration}</span>
               </p>
             </div>
-            <p className="description">
-              {showMore ? synopsis : synopsis?.substring(0, 450) + "..."}
-              <button
-                onClick={() => {
-                  setShowMore(!showMore);
-                }}
-              >
-                {showMore ? "Show Less" : "Read more"}
-              </button>
-            </p>
           </div>
-          <h3 className="title">Trailer</h3>
-          <div className="trailer-con">
-            {trailer?.embed_url && (
-              <iframe
-                src={trailer?.embed_url}
-                title={title}
-                width={800}
-                height={450}
-                allow="accelerometer; autoplay: clipboard-write; encrypted-media: gyroscope: picture-in-picture"
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-            )}
-          </div>
+          <p className="description">
+            {showMore ? synopsis : synopsis?.substring(0, 450) + '...'}
+            <button
+              onClick={() => {
+                setShowMore(!showMore)
+              }}
+            >
+              {showMore ? 'Show Less' : 'Read more'}
+            </button>
+          </p>
+        </div>
+        <h3 className="title">Trailer</h3>
+        <div className="trailer-con">
+          {trailer?.embed_url && (
+            <iframe
+              src={trailer?.embed_url}
+              title={title}
+              width={800}
+              height={450}
+              allow="accelerometer; autoplay: clipboard-write; encrypted-media: gyroscope: picture-in-picture"
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          )}
         </div>
       </AnimeItemStyled>
     </div>
-  );
+  )
 }
 
 const AnimeItemStyled = styled.div`
@@ -160,6 +150,7 @@ const AnimeItemStyled = styled.div`
       transform: skew(-3deg);
     }
   }
+
   .title {
     display: inline-block;
     margin: 3rem 0;
@@ -169,6 +160,7 @@ const AnimeItemStyled = styled.div`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
   .description {
     margin-top: 2rem;
     color: #6c7983;
@@ -183,5 +175,47 @@ const AnimeItemStyled = styled.div`
       font-weight: 600;
     }
   }
-`;
-export default AnimeItem;
+
+  .trailer-con {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    iframe {
+      outline: none;
+      border: 5px solid #e5e7eb;
+      padding: 1.5rem;
+      border-radius: 10px;
+      background-color: #ffff;
+    }
+  }
+
+  .details {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 5px solid #e5e7eb;
+    .detail {
+      display: flex;
+      grid-template-columns: repeat (2, 1fr);
+      img {
+        border-radius: 7px;
+      }
+
+      .anime-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 3rem;
+        p {
+          display: flex;
+          gap: 1rem;
+        }
+        p span:first-child {
+          font-weight: 600;
+          color: #454e56;
+        }
+      }
+    }
+  }
+`
+export default AnimeItem

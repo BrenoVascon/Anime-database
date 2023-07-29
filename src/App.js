@@ -1,9 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Popular from "./components/Popular";
-import AnimeItem from "./components/AnimeItem";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Popular from './Components/Popular'
+import AnimeItem from './Components/AnimeItem'
 
 function App() {
-  console.log(global);
+  console.log(global)
   return (
     <BrowserRouter>
       <Routes>
@@ -11,7 +11,7 @@ function App() {
         <Route path="/anime/:id" element={<AnimeItem />} />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
