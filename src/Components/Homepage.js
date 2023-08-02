@@ -1,11 +1,12 @@
 import React from "react";
-import { Popular } from "./Popular";
+import Popular from "./Popular";
 
 // import { Container } from './styles';
 
 function Homepage() {
   const [rendered, setRendered] = React.useState("popular");
 
+  // eslint-disable-next-line no-unused-vars
   const switchComponent = () => {
     switch (rendered) {
       case "popular":
