@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import React from 'react'
-import styled from 'styled-components'
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
 
 function AnimeItem() {
-  const { id } = useParams()
+  const { id } = useParams();
 
   //state
-  const [anime, setAnime] = React.useState({})
-  const [characters, setCharacters] = React.useState([])
-  const [showMore, setShowMore] = React.useState([false])
+  const [anime, setAnime] = React.useState({});
+  const [characters, setCharacters] = React.useState([]);
+  const [showMore, setShowMore] = React.useState([false]);
 
   //destructure anime
   const {
@@ -27,30 +27,30 @@ function AnimeItem() {
     popularity,
     status,
     rating,
-    source
-  } = anime
+    source,
+  } = anime;
 
   //get anime based on id
-  const getAnime = async id => {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
-    const data = await response.json()
-    setAnime(data.data)
-  }
+  const getAnime = async (id) => {
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+    const data = await response.json();
+    setAnime(data.data);
+  };
 
   // get characters
-  const getCharacters = async anime => {
+  const getCharacters = async (anime) => {
     const response = await fetch(
       `https://api.jikan.moe/v4/anime/${anime}/characters`
-    )
-    const data = await response.json()
-    setCharacters(data.data)
-  }
+    );
+    const data = await response.json();
+    setCharacters(data.data);
+  };
 
   //initial render
   useEffect(() => {
-    getAnime(id)
-    getCharacters(id)
-  }, [id])
+    getAnime(id);
+    getCharacters(id);
+  }, [id]);
 
   return (
     <div>
@@ -105,13 +105,13 @@ function AnimeItem() {
             </div>
           </div>
           <p className="description">
-            {showMore ? synopsis : synopsis?.substring(0, 450) + '...'}
+            {showMore ? synopsis : synopsis?.substring(0, 450) + "..."}
             <button
               onClick={() => {
-                setShowMore(!showMore)
+                setShowMore(!showMore);
               }}
             >
-              {showMore ? 'Show Less' : 'Read more'}
+              {showMore ? "Show Less" : "Read more"}
             </button>
           </p>
         </div>
@@ -129,9 +129,25 @@ function AnimeItem() {
             ></iframe>
           )}
         </div>
+        <h3 className="title">Characters</h3>
+        <div className="characters">
+          {characters?.map((character, index) => {
+            const { role } = character;
+            const { images, name, mal_id } = character.character;
+            return (
+              <Link href to={`/character/${mal_id}`} key={index}>
+                <div className="character">
+                  <img src={images?.jpg.image_url} alt="" />
+                  <h4>{name}</h4>
+                  <p>{role}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </AnimeItemStyled>
     </div>
-  )
+  );
 }
 
 const AnimeItemStyled = styled.div`
@@ -217,5 +233,33 @@ const AnimeItemStyled = styled.div`
       }
     }
   }
-`
-export default AnimeItem
+  .characters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 5px solid #e5e7eb;
+    .character{
+      padding: .4rem .6rem;
+      border-radius: 7px;
+      background-color: #ededed;
+      transition> all .4s ease-in-out;
+      img{
+        width: 100%;
+      }
+      h4{
+        padding: .5rem 0;
+        color: #454e56;
+      }
+      p{
+        color: #27ae60;
+      }
+      &:hover{
+       transform: translateY(-5px);
+      }
+    }
+  }
+`;
+export default AnimeItem;
