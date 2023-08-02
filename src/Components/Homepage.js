@@ -1,5 +1,5 @@
 import React from "react";
-import Popular from "./Popular";
+import { Popular } from "./Popular";
 
 // import { Container } from './styles';
 
