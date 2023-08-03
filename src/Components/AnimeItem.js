@@ -46,7 +46,7 @@ function AnimeItem() {
     setCharacters(data.data);
   };
 
-  //initial render
+  //initial Render
   useEffect(() => {
     getAnime(id);
     getCharacters(id);
