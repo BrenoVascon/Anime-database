@@ -8,7 +8,7 @@ const baseUrl = "https://api.jikan.moe/v4";
 const LOADING = "LOADING";
 const SEARCH = "SEARCH";
 const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
-const GET_UPOCOMING_ANIME = "GET_UPOCOMING_ANIME";
+const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME";
 
 //reducer
@@ -20,6 +20,10 @@ const reducer = (state, action) => {
     case GET_POPULAR_ANIME:
       return { ...state, popularAnime: action.payload, loading: false };
     case SEARCH:
+      return { ...state, searchResults: action.payload, loading: false };
+    case GET_UPCOMING_ANIME:
+      return { ...state, searchResults: action.payload, loading: false };
+    case GET_AIRING_ANIME:
       return { ...state, searchResults: action.payload, loading: false };
     default:
       return state;
@@ -47,6 +51,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  //handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (search) {
@@ -66,8 +71,23 @@ export const GlobalContextProvider = ({ children }) => {
     dispatch({ type: GET_POPULAR_ANIME, payload: data.data });
   };
 
-  // Search anime
+  // fetch upcoming anime
+  const getUpcomingAnime = async () => {
+    dispatch({ type: LOADING });
+    const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`);
+    const data = await response.json();
+    dispatch({ type: GET_UPCOMING_ANIME, payload: data.data });
+  };
 
+  //fetch airing anime
+  const getAiringAnime = async () => {
+    dispatch({ type: LOADING });
+    const response = await fetch(`${baseUrl}/top/anime?filter=airing`);
+    const data = await response.json();
+    dispatch({ type: GET_AIRING_ANIME, payload: data.data });
+  };
+
+  // Search anime
   const searchAnime = async (anime) => {
     dispatch({ type: LOADING });
     const response = await fetch(
@@ -77,7 +97,7 @@ export const GlobalContextProvider = ({ children }) => {
     dispatch({ type: SEARCH, payload: data.data });
   };
 
-  //unitial render
+  //initial render
   React.useEffect(() => {
     getPopularAnime();
   }, []);
@@ -90,6 +110,9 @@ export const GlobalContextProvider = ({ children }) => {
         handleSubmit,
         searchAnime,
         search,
+        getPopularAnime,
+        getUpcomingAnime,
+        getAiringAnime,
       }}
     >
       {children}
