@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import React from "react";
@@ -262,4 +261,5 @@ const AnimeItemStyled = styled.div`
     }
   }
 `;
+
 export default AnimeItem;
