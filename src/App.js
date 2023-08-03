@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import AnimeItem from "./components/AnimeItem";
 import Homepage from "./components/Homepage";
 
