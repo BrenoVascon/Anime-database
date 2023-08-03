@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AnimeItem from "./components/AnimeItem";
+import AnimeItem from "./components/Animeitem";
 import Homepage from "./components/Homepage";
 
 function App() {
