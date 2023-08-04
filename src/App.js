@@ -3,11 +3,10 @@ import AnimeItem from "./components/Animeitem";
 import Homepage from "./components/Homepage";
 
 function App() {
-  console.log(global);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Homepage />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/anime/:id" element={<AnimeItem />} />
       </Routes>
     </BrowserRouter>
