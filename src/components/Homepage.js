@@ -5,7 +5,7 @@ import { useGlobalContext } from "../context/global";
 import styled from "styled-components";
 import Upcoming from "./Upcoming";
 
-// import { Container } from './styles';
+// homepage
 
 function Homepage() {
   const {
