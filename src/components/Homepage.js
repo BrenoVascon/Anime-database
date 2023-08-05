@@ -4,6 +4,7 @@ import Popular from "./Popular";
 import { useGlobalContext } from "../context/global";
 import styled from "styled-components";
 import Upcoming from "./Upcoming";
+import Airing from "./Airing";
 
 // homepage
 
@@ -16,6 +17,7 @@ function Homepage() {
     getUpcomingAnime,
     getAiringAnime,
     getPopularAnime,
+    getAnimePictures,
   } = useGlobalContext();
 
   const [rendered, setRendered] = React.useState("popular");
@@ -26,7 +28,7 @@ function Homepage() {
       case "popular":
         return <Popular rendered={rendered} />;
       case "airing":
-        return <Popular rendered={rendered} />;
+        return <Airing rendered={rendered} />;
       case "upcoming":
         return <Upcoming rendered={rendered} />;
       default:

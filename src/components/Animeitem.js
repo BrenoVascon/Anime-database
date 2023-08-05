@@ -240,23 +240,23 @@ const AnimeItemStyled = styled.div`
     padding: 2rem;
     border-radius: 20px;
     border: 5px solid #e5e7eb;
-    .character{
-      padding: .4rem .6rem;
+    .character {
+      padding: 0.4rem 0.6rem;
       border-radius: 7px;
       background-color: #ededed;
-      transition> all .4s ease-in-out;
-      img{
+      transition: all 0.4s ease-in-out;
+      img {
         width: 100%;
       }
-      h4{
-        padding: .5rem 0;
+      h4 {
+        padding: 0.5rem 0;
         color: #454e56;
       }
-      p{
+      p {
         color: #27ae60;
       }
-      &:hover{
-       transform: translateY(-5px);
+      &:hover {
+        transform: translateY(-5px);
       }
     }
   }
