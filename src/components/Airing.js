@@ -2,13 +2,14 @@ import React from "react";
 import { useGlobalContext } from "../context/global";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Sidebar from "./sidebar";
 
-function Airing(rendered) {
+function Airing({ rendered }) {
   const { airingAnime, isSearch, searchResults } = useGlobalContext();
 
   const conditionalRender = () => {
     if (!isSearch && rendered === "airing") {
-      return airingAnime.map((anime) => {
+      return airingAnime?.map((anime) => {
         return (
           <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
             <img src={anime.images.jpg.large_image_url} alt="" />
@@ -16,7 +17,7 @@ function Airing(rendered) {
         );
       });
     } else {
-      return searchResults.map((anime) => {
+      return searchResults?.map((anime) => {
         return (
           <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
             <img src={anime.images.jpg.large_image_url} alt="" />
@@ -28,6 +29,7 @@ function Airing(rendered) {
   return (
     <PopularStyle>
       <div className="airing-anime">{conditionalRender()}</div>
+      <Sidebar />
     </PopularStyle>
   );
 }

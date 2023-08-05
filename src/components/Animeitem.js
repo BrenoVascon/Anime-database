@@ -116,7 +116,7 @@ function AnimeItem() {
         </div>
         <h3 className="title">Trailer</h3>
         <div className="trailer-con">
-          {trailer?.embed_url && (
+          {trailer?.embed_url ? (
             <iframe
               src={trailer?.embed_url}
               title={title}
@@ -126,6 +126,8 @@ function AnimeItem() {
               frameBorder="0"
               allowFullScreen
             ></iframe>
+          ) : (
+            <h3>Trailer not available</h3>
           )}
         </div>
         <h3 className="title">Characters</h3>

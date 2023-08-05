@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import Popular from "./Popular";
 import { useGlobalContext } from "../context/global";
+import Popular from "./Popular";
 import styled from "styled-components";
 import Upcoming from "./Upcoming";
 import Airing from "./Airing";
-
-// homepage
 
 function Homepage() {
   const {
@@ -17,12 +14,10 @@ function Homepage() {
     getUpcomingAnime,
     getAiringAnime,
     getPopularAnime,
-    getAnimePictures,
   } = useGlobalContext();
 
   const [rendered, setRendered] = React.useState("popular");
 
-  // eslint-disable-next-line no-unused-vars
   const switchComponent = () => {
     switch (rendered) {
       case "popular":
@@ -49,13 +44,13 @@ function Homepage() {
           </h1>
         </div>
         <div className="search-container">
-          <div className="filter-btn.popular-filter">
+          <div className="filter-btn popular-filter">
             <button
               onClick={() => {
                 setRendered("popular");
               }}
             >
-              Popular
+              Popular<i className="fas fa-fire"></i>
             </button>
           </div>
           <form action="" className="search-form" onSubmit={handleSubmit}>
@@ -69,8 +64,7 @@ function Homepage() {
               <button type="submit">Search</button>
             </div>
           </form>
-
-          <div className="filter-btn.airing-filter">
+          <div className="filter-btn airing-filter">
             <button
               onClick={() => {
                 setRendered("airing");
@@ -80,14 +74,14 @@ function Homepage() {
               Airing
             </button>
           </div>
-          <div className="filter-btn.upcoming-filter">
+          <div className="filter-btn upcoming-filter">
             <button
               onClick={() => {
                 setRendered("upcoming");
                 getUpcomingAnime();
               }}
             >
-              UpComing
+              Upcoming
             </button>
           </div>
         </div>
@@ -104,6 +98,9 @@ const HomepageStyled = styled.div`
     width: 60%;
     margin: 0 auto;
     transition: all 0.4s ease-in-out;
+    @media screen and (max-width: 1530px) {
+      width: 95%;
+    }
     .logo {
       display: flex;
       align-items: center;
@@ -158,5 +155,4 @@ const HomepageStyled = styled.div`
   }
 `;
 
-//adjust
 export default Homepage;
